@@ -2,17 +2,13 @@ import React from "react";
 import { useWatch } from "./useWatch";
 import { useCollection } from "./useCollection";
 import { useApp } from "../components/RealmApp";
-import atlasConfig from "../atlasConfig.json";
 import {
     addValueAtIndex,
     replaceValueAtIndex,
     updateValueAtIndex,
-    removeValueAtIndex,
     getKeywordIndex, updateTag,
 } from "../utils";
 import { LegendConstants } from "../constants/legend"
-
-const {dataSourceName} = atlasConfig;
 
 export function useData() {
 
@@ -25,12 +21,12 @@ export function useData() {
     }, {}))
     // Get a client object for the todo item collection
     const dbCollection = useCollection({
-        cluster: dataSourceName,
+        cluster: "mongodb-atlas",
         db: "data",
         collection: "Keywords",
     });
 
-    const tagCollection = useCollection({cluster: dataSourceName, db: "data", collection: "Users"})
+    const tagCollection = useCollection({cluster: "mongodb-atlas", db: "data", collection: "Users"})
 
     // Fetch all todos on load and whenever our collection changes (e.g. if the current user changes)
     React.useEffect(() => {

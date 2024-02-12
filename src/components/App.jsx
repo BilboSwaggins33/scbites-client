@@ -15,12 +15,11 @@ import { HomePage } from "./HomePage";
 import { AppProvider, useApp } from "./RealmApp";
 import { ThemeProvider } from "./Theme";
 import { AppName } from "./AppName";
-import atlasConfig from "../atlasConfig.json";
 import "./App.css";
 import * as React from 'react'
 import { PersonRemove, Logout } from "@mui/icons-material";
 
-const {appId} = atlasConfig;
+const appId = "application-0-ctauu";
 
 //FEATURE Enter Keywords
 //FEATURE Select Tags from Legend

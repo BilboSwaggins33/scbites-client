@@ -1,8 +1,7 @@
 import React from "react";
 import * as Realm from "realm-web";
-import atlasConfig from "../atlasConfig.json";
 
-const { baseUrl } = atlasConfig;
+const baseUrl = "https://realm.mongodb.com";
 
 function createApp(id) {
   return new Realm.App({ id, baseUrl });
