@@ -1,0 +1,15 @@
+export const LegendConstants = Object.freeze({
+    EGGS : 'Eggs',
+    FISH : 'Fish',
+    FOOD_NOT_ANALYZED_FOR_ALLEGENS : 'Food Not Analyzed for Allergens',
+    HALAL_INGREDIENTS : 'Halal Ingredients',
+    PEANUTS : 'Peanuts',
+    PORK : 'Pork',
+    SESAME : 'Sesame',
+    SHELLFISH : 'Shellfish',
+    SOY : 'Soy',
+    TREE_NUTS : 'Tree Nuts',
+    VEGAN : 'Vegan',
+    VEGETARIAN : 'Vegetarian',
+    WHEAT_GLUTEN : 'Wheat / Gluten',
+})
