@@ -69,11 +69,11 @@ function App() {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: 400,
+        width: 300,
         bgcolor: 'background.paper',
         boxShadow: 24,
         borderRadius: '10px',
-        p: 3
+        p: 3,
     };
 
 
@@ -93,13 +93,13 @@ function App() {
                         <Typography id="modal-modal-description" sx={{mt: 1}}>
                             You can also unsubscribe to stop receiving emails.
                         </Typography>
-                        <Container sx={{mt: 5}}>
+                        <div style={{marginTop: 40}}>
                             <Button sx={{mr: 3}} onClick={() => {
                                 setMOpen(false);
                                 handleDeleteAccount()
                             }} variant="contained">Yes, delete my account</Button>
                             <Button onClick={() => setMOpen(false)} variant="outlined">Cancel</Button>
-                        </Container>
+                        </div>
 
                     </Box>
                 </Modal>
@@ -108,7 +108,10 @@ function App() {
                     {currentUser ? (
                         <div>
                             <Box sx={{display: 'flex', alignItems: 'center', textAlign: 'center'}}>
-                                <a style={{textDecoration: "none", color: 'white'}} href='mailto:scbitesinfo@gmail.com'><Typography sx={{minWidth: 100}}>Contact</Typography></a>
+                                <a target="_blank" style={{textDecoration: "none", color: 'white'}} href='https://hospitality.usc.edu/residential-dining-menus/'><Typography
+                                    sx={{minWidth: 100}}>Menus</Typography></a>
+                                <a style={{textDecoration: "none", color: 'white'}} href='mailto:scbitesinfo@gmail.com'><Typography
+                                    sx={{minWidth: 100}}>Contact</Typography></a>
                                 <Tooltip title="Account">
                                     <IconButton
                                         onClick={handleClick}

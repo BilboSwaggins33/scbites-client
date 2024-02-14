@@ -25,12 +25,38 @@ export function HomePage() {
                 ) : null
             ) : (
                 <div className="sub-container">
+                    <div>
+                        <div className="legend-items-container">
+                            <div style={{marginTop: '10px', marginBottom: '-10px'}}>
+                                <FormControlLabel control={<Checkbox/>} label="Enable emails."
+                                                  checked={subscribed()} onChange={unsubscribe}/>
+                            </div>
+                            <div style={{marginTop: 20}}>
+                                {Object.keys(tags).map((tag, idx) => (
+                                    <LegendItem
+                                        key={idx}
+                                        tag={tag}
+                                        toggleVal={toggleVal}
+                                        saveToggle={saveToggle}
+                                    />
+                                ))}
+                            </div>
+
+                        </div>
+                    </div>
+
                     <div className="keyword-items-container">
-                        <Typography component="p" variant="h5">
-                            {`${keywords.length} Keyword${
-                                keywords.length === 1 ? "" : "s"
-                            }`}
-                        </Typography>
+                        <div style={{marginLeft: 20, marginTop: 15}}>
+                            <Typography component="p" variant="h5">
+                                {`${keywords.length} Keyword${
+                                    keywords.length === 1 ? "" : "s"
+                                }`}
+                            </Typography>
+                            <Typography color="#888" component="p" variant="body1">
+                                Add keywords, and get notified when items with those keywords are on the menu today.
+                            </Typography>
+                        </div>
+
                         <List style={{width: "100%"}}>
                             {draftKeywords.map((draft) => (
                                 <DraftKeywordItem
@@ -50,23 +76,8 @@ export function HomePage() {
 
                         </List>
                     </div>
-                    <div className="legend-items-container">
-                        <div className="legend-items-container">
-                            <FormControlLabel control={<Checkbox/>} label="Subscribe to the email notification service."
-                                              checked={subscribed()} onChange={unsubscribe}/>
-                        </div>
-                        <div style={{marginTop: 20}}>
-                            {Object.keys(tags).map((tag, idx) => (
-                                <LegendItem
-                                    key={idx}
-                                    tag={tag}
-                                    toggleVal={toggleVal}
-                                    saveToggle={saveToggle}
-                                />
-                            ))}
-                        </div>
 
-                    </div>
+
                 </div>
             )}
         </div>
