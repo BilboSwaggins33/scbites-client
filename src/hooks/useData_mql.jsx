@@ -6,6 +6,7 @@ import {
     addValueAtIndex,
     replaceValueAtIndex,
     updateValueAtIndex,
+    removeValueAtIndex,
     getKeywordIndex, updateTag,
 } from "../utils";
 import { LegendConstants } from "../constants/legend"
@@ -147,7 +148,12 @@ export function useData() {
                 if (loading) {
                     return oldData;
                 }
-                return [];
+                const idx = getKeywordIndex(oldData, {_id: change.documentKey._id});
+                if (idx >= 0) {
+                    return removeValueAtIndex(oldData, idx);
+                } else {
+                    return oldData;
+                }
             });
         },
     });
