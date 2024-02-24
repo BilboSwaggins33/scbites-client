@@ -135,7 +135,7 @@ You will need to have node installed to run the project.
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Run the following command to start the express server.
+Run the following command to start on http://localhost:3000:
    ```sh
    npm start
    ```
