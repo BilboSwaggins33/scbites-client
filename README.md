@@ -157,6 +157,9 @@ Run the following command to start the express server.
 
 See the [open issues](https://github.com/BilboSwaggins33/scbites-client/issues) for a full list of proposed features (and known issues).
 
+Note: I am a student, with limited experience with building and deploying software. There is still a lot of things within the code that
+can be improved, and so feel free to provide suggestions and feedback on how to improve the repo!
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
