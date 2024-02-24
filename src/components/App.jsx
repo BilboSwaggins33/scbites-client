@@ -19,7 +19,7 @@ import "./App.css";
 import * as React from 'react'
 import { PersonRemove, Logout } from "@mui/icons-material";
 
-const appId = "application-0-ctauu";
+const appId = process.env.REALM_APP_ID;
 
 //FEATURE Enter Keywords
 //FEATURE Select Tags from Legend
