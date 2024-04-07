@@ -13,25 +13,25 @@ import { getKeywordId } from "../utils";
 import { LegendItem } from "./LegendItem";
 
 export function HomePage() {
-    const {loading, keywords, tags, toggleVal, saveToggle, unsubscribe, subscribed, ...keywordActions} = useData();
-    const {draftKeywords, ...draftKeywordActions} = useDraftKeyword();
+    const { loading, keywords, tags, toggleVal, saveToggle, unsubscribe, subscribed, ...keywordActions } = useData();
+    const { draftKeywords, ...draftKeywordActions } = useDraftKeyword();
     const showLoader = useShowLoader(loading, 500);
 
     return (
         <div className="main-container">
             {loading ? (
                 showLoader ? (
-                    <LinearProgress/>
+                    <LinearProgress />
                 ) : null
             ) : (
                 <div className="sub-container">
                     <div>
                         <div className="legend-items-container">
-                            <div style={{marginTop: '10px', marginBottom: '-10px'}}>
-                                <FormControlLabel control={<Checkbox/>} label="Enable emails."
-                                                  checked={subscribed()} onChange={unsubscribe}/>
+                            <div style={{ marginTop: '10px', marginBottom: '-10px' }}>
+                                <FormControlLabel control={<Checkbox />} label="Enable emails."
+                                    checked={subscribed()} onChange={unsubscribe} />
                             </div>
-                            <div style={{marginTop: 20}}>
+                            <div style={{ marginTop: 20 }}>
                                 {Object.keys(tags).map((tag, idx) => (
                                     <LegendItem
                                         key={idx}
@@ -44,20 +44,18 @@ export function HomePage() {
 
                         </div>
                     </div>
-
                     <div className="keyword-items-container">
-                        <div style={{marginLeft: 20, marginTop: 15}}>
+                        <div style={{ marginLeft: 20, marginTop: 15 }}>
                             <Typography component="p" variant="h5">
-                                {`${keywords.length} Keyword${
-                                    keywords.length === 1 ? "" : "s"
-                                }`}
+                                {`${keywords.length} Keyword${keywords.length === 1 ? "" : "s"
+                                    }`}
                             </Typography>
                             <Typography color="#888" component="p" variant="body1">
                                 Add keywords, and get notified when items with those keywords are on the menu today.
                             </Typography>
                         </div>
 
-                        <List style={{width: "100%"}}>
+                        <List style={{ width: "100%" }}>
                             {draftKeywords.map((draft) => (
                                 <DraftKeywordItem
                                     key={getKeywordId(draft)}
@@ -78,9 +76,13 @@ export function HomePage() {
                     </div>
 
 
+                    {/*<div className="legend-items-container">
+                        <img className="homeImage" src="/rtcc.jpg" />
+                    </div>*/}
                 </div>
-            )}
-        </div>
+            )
+            }
+        </div >
 
     );
 }
