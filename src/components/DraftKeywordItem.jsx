@@ -7,43 +7,43 @@ import {
     ListItemText,
 } from "@mui/material";
 import { withStyles } from "tss-react/mui";
-
-const ListItemWithTwoSecondaryActions = withStyles(ListItem, {
-    secondaryAction: {
-        paddingRight: "120px",
-    },
-});
-
-
-export function DraftKeywordItem({keyword, keywordActions, draftKeywordActions}) {
+import IconButton from '@mui/material/IconButton'
+import { ArrowForward } from "@mui/icons-material";
+import Icon from '@mui/material/Icon'
+export function DraftKeywordItem({ keyword, keywordActions, draftKeywordActions }) {
 
     return (
-        <ListItemWithTwoSecondaryActions>
-            <ListItemText>
-                <TextField
-                    style={{width: "100%"}}
-                    placeholder="Enter a keyword..."
-                    size="small"
-                    value={keyword.summary}
-                    onChange={(e) => {
-                        draftKeywordActions.setDraftKeywordSummary(keyword, e.target.value);
-                    }}
-                />
-            </ListItemText>
-            <ListItemSecondaryAction>
-                <Button
-                    variant="outlined"
-                    size="small"
-                    onClick={async () => {
+        <div className='keyword-input-container'>
+            <input
+                className="keyword-input"
+                placeholder="Enter keywords..."
+                style={{ width: "100%" }}
+                value={keyword.summary}
+                onKeyDown={async (e) => {
+                    if (e.key == 'Enter') {
+
                         await keywordActions.saveKeyword(keyword);
                         draftKeywordActions.deleteDraftKeyword(keyword);
                         draftKeywordActions.createDraftKeyword();
-                    }}
-                >
-                    Add
-                </Button>
+                    }
 
-            </ListItemSecondaryAction>
-        </ListItemWithTwoSecondaryActions>
+                }}
+                onChange={(e) => {
+                    draftKeywordActions.setDraftKeywordSummary(keyword, e.target.value);
+                }}
+            />
+            <IconButton style={{ width: 52 }} onClick={async () => {
+
+                await keywordActions.saveKeyword(keyword);
+                draftKeywordActions.deleteDraftKeyword(keyword);
+                draftKeywordActions.createDraftKeyword();
+
+            }}>
+                <ArrowForward />
+            </IconButton>
+        </div >
+
+
+
     );
 }

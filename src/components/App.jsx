@@ -31,7 +31,7 @@ export default function ProvidedApp() {
     return (
         <ThemeProvider>
             <AppProvider appId={appId}>
-                <App/>
+                <App />
             </AppProvider>
         </ThemeProvider>
     );
@@ -42,7 +42,7 @@ function App() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const [mOpen, setMOpen] = React.useState(false);
-    const {currentUser, logOut, deleteAccount} = useApp();
+    const { currentUser, logOut, deleteAccount } = useApp();
 
     const handlemClose = () => {
         setMOpen(false);
@@ -91,11 +91,11 @@ function App() {
                         <Typography id="modal-modal-title" variant="h6" component="h2">
                             Are you sure you want to delete your account?
                         </Typography>
-                        <Typography id="modal-modal-description" sx={{mt: 1}}>
+                        <Typography id="modal-modal-description" sx={{ mt: 1 }}>
                             You can also unsubscribe to stop receiving emails.
                         </Typography>
-                        <div style={{marginTop: 40}}>
-                            <Button sx={{mr: 3}} onClick={() => {
+                        <div style={{ marginTop: 40 }}>
+                            <Button sx={{ mr: 3 }} onClick={() => {
                                 setMOpen(false);
                                 handleDeleteAccount()
                             }} variant="contained">Yes, delete my account</Button>
@@ -105,24 +105,24 @@ function App() {
                     </Box>
                 </Modal>
                 <Toolbar>
-                    <AppName/>
+                    <AppName />
                     {currentUser ? (
                         <div>
-                            <Box sx={{display: 'flex', alignItems: 'center', textAlign: 'center'}}>
-                                <a target="_blank" style={{textDecoration: "none", color: 'white'}} href='https://hospitality.usc.edu/residential-dining-menus/'><Typography
-                                    sx={{minWidth: 100}}>Menus</Typography></a>
-                                <a style={{textDecoration: "none", color: 'white'}} href='mailto:scbitesinfo@gmail.com'><Typography
-                                    sx={{minWidth: 100}}>Contact</Typography></a>
+                            <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+                                <a target="_blank" style={{ textDecoration: "none", color: 'white' }} href='https://hospitality.usc.edu/residential-dining-menus/'><Typography
+                                    sx={{ width: 'max(60px, 10vw)', fontWeight: 600 }}>Menus</Typography></a>
+                                <a style={{ textDecoration: "none", color: 'white' }} href='mailto:scbitesinfo@gmail.com'><Typography
+                                    sx={{ width: 'max(60px, 10vw)', fontWeight: 600 }}>Contact</Typography></a>
                                 <Tooltip title="Account">
                                     <IconButton
                                         onClick={handleClick}
                                         size="small"
-                                        sx={{ml: 2}}
+                                        sx={{ ml: 2 }}
                                         aria-controls={open ? 'account-menu' : undefined}
                                         aria-haspopup="true"
                                         aria-expanded={open ? 'true' : undefined}
                                     >
-                                        <Avatar sx={{width: 32, height: 32}}></Avatar>
+                                        <Avatar sx={{ width: 32, height: 32 }}></Avatar>
                                     </IconButton>
                                 </Tooltip>
                             </Box>
@@ -158,20 +158,20 @@ function App() {
                                         },
                                     },
                                 }}
-                                transformOrigin={{horizontal: 'right', vertical: 'top'}}
-                                anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
+                                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                             >
                                 <MenuItem onClick={handleLogout}>
                                     <ListItemIcon>
-                                        <Logout fontSize="small"/>
+                                        <Logout fontSize="small" />
                                     </ListItemIcon>
                                     Log out
                                 </MenuItem>
 
-                                <Divider/>
+                                <Divider />
                                 <MenuItem onClick={() => setMOpen(true)}>
                                     <ListItemIcon>
-                                        <PersonRemove fontSize="small"/>
+                                        <PersonRemove fontSize="small" />
                                     </ListItemIcon>
                                     Delete Account
                                 </MenuItem>
@@ -181,7 +181,7 @@ function App() {
                     ) : null}
                 </Toolbar>
             </AppBar>
-            {currentUser ? <HomePage/> : <LoginPage/>}
+            {currentUser ? <HomePage /> : <LoginPage />}
         </div>
     );
 }

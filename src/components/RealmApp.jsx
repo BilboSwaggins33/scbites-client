@@ -10,16 +10,13 @@ function createApp(id) {
 const AppContext = React.createContext(null);
 
 export function AppProvider({ appId, children }) {
-  // Store Realm.App in React state. If appId changes, all children will rerender and use the new App.
   const [app, setApp] = React.useState(createApp(appId));
 
   React.useEffect(() => {
     setApp(createApp(appId));
   }, [appId]);
-  // Store the app's current user in state and wrap the built-in auth functions to modify this state
   const [currentUser, setCurrentUser] = React.useState(app.currentUser);
 
-  // Wrap the base logIn function to save the logged in user in state
   const logIn = React.useCallback(
     async (credentials) => {
       await app.logIn(credentials);
@@ -27,7 +24,6 @@ export function AppProvider({ appId, children }) {
     },
     [app]
   );
-  // Wrap the current user's logOut function to remove the logged out user from state
   const logOut = React.useCallback(async () => {
     try {
       const user = app.currentUser;
@@ -41,21 +37,20 @@ export function AppProvider({ appId, children }) {
     setCurrentUser(app.currentUser);
   }, [app]);
 
-  const deleteAccount = React.useCallback(async() =>  {
+  const deleteAccount = React.useCallback(async () => {
     try {
       const user = app.currentUser;
       const mdb = app.currentUser.mongoClient('mongodb-atlas');
       const userCollection = mdb.db("data").collection("Users");
-      await userCollection.deleteOne({"owner_id": user.id})
+      await userCollection.deleteOne({ "owner_id": user.id })
       await app.deleteUser(user);
       console.log("deleting")
-    } catch(err) {
+    } catch (err) {
       console.log(err)
     }
     setCurrentUser(app.currentUser)
   }, [app])
 
-  // Override the App's currentUser & logIn properties + include the app-level logout function
   const appContext = React.useMemo(() => {
     return { ...app, currentUser, logIn, logOut, deleteAccount };
   }, [app, currentUser, logIn, logOut, deleteAccount]);
@@ -71,7 +66,7 @@ export function useApp() {
   const app = React.useContext(AppContext);
   if (!app) {
     throw new Error(
-      `No App Services App found. Make sure to call useApp() inside of a <AppProvider />.`
+      `No App Services App found.`
     );
   }
   return app;

@@ -24,61 +24,47 @@ export function HomePage() {
                     <LinearProgress />
                 ) : null
             ) : (
-                <div className="sub-container">
-                    <div>
-                        <div className="legend-items-container">
-                            <div style={{ marginTop: '10px', marginBottom: '-10px' }}>
-                                <FormControlLabel control={<Checkbox />} label="Enable emails."
-                                    checked={subscribed()} onChange={unsubscribe} />
+                <div className="main" style={{ height: '100%' }}>
+                    <div className="sub-container">
+
+                        <div className="keyword-items-container">
+                            <div style={{ margin: 0 }}>
+                                <Typography color="#888" component="p" variant="h4">
+                                    What's your favorite dish?
+                                </Typography>
                             </div>
-                            <div style={{ marginTop: 20 }}>
-                                {Object.keys(tags).map((tag, idx) => (
-                                    <LegendItem
-                                        key={idx}
-                                        tag={tag}
-                                        toggleVal={toggleVal}
-                                        saveToggle={saveToggle}
+
+                            <div style={{ width: "100%" }}>
+                                {draftKeywords.map((draft) => (
+                                    <DraftKeywordItem
+                                        key={getKeywordId(draft)}
+                                        keyword={draft}
+                                        keywordActions={keywordActions}
+                                        draftKeywordActions={draftKeywordActions}
                                     />
                                 ))}
+                                {keywords.map((keyword) => (
+                                    <KeywordItem
+                                        key={getKeywordId(keyword)}
+                                        keyword={keyword}
+                                        keywordActions={keywordActions}
+                                    />
+                                ))}
+
                             </div>
-
-                        </div>
-                    </div>
-                    <div className="keyword-items-container">
-                        <div style={{ marginLeft: 20, marginTop: 15 }}>
-                            <Typography component="p" variant="h5">
-                                {`${keywords.length} Keyword${keywords.length === 1 ? "" : "s"
-                                    }`}
-                            </Typography>
-                            <Typography color="#888" component="p" variant="body1">
-                                Add keywords, and get notified when items with those keywords are on the menu today.
-                            </Typography>
                         </div>
 
-                        <List style={{ width: "100%" }}>
-                            {draftKeywords.map((draft) => (
-                                <DraftKeywordItem
-                                    key={getKeywordId(draft)}
-                                    keyword={draft}
-                                    keywordActions={keywordActions}
-                                    draftKeywordActions={draftKeywordActions}
-                                />
-                            ))}
-                            {keywords.map((keyword) => (
-                                <KeywordItem
-                                    key={getKeywordId(keyword)}
-                                    keyword={keyword}
-                                    keywordActions={keywordActions}
-                                />
-                            ))}
-
-                        </List>
                     </div>
 
-
-                    {/*<div className="legend-items-container">
-                        <img className="homeImage" src="/rtcc.jpg" />
-                    </div>*/}
+                    <div className="footer">
+                        <FormControlLabel style={{ marginLeft: 5 }} control={<Checkbox />} label="Enable emails." checked={subscribed()} onChange={unsubscribe} sx={{ color: '#666', '.MuiFormControlLabel-label': { fontSize: 'max(15px, 1vw)', lineHeight: 'max(13px, 1vw)' } }} />
+                        <div className="siteDesc">
+                            <Typography color="#888" sx={{ minWidth: '150px', fontSize: 'max(10px, 1vw)' }} variant="subtitle2">
+                                <b>How does this site work?</b> Simply enter your favorite foods (for example, salmon!), and you will get a daily email notifying you if your favorite food has made an appearance at a dining hall!
+                            </Typography>
+                        </div>
+                        <div></div>
+                    </div>
                 </div>
             )
             }

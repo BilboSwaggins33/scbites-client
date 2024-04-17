@@ -16,18 +16,19 @@ import { toggleBoolean } from "../utils";
 import { useErrorAlert } from "../hooks/useErrorAlert";
 
 
+
 export function LoginPage() {
     const app = useApp();
     const formRef = React.useRef();
     // Track whether the user is logging in or signing up for a new account
     const [isSignup, setIsSignup] = React.useState(false);
-    const [isResend, setIsResend] = React.useState({val: false, type: 'email'});
+    const [isResend, setIsResend] = React.useState({ val: false, type: 'email' });
     const toggleIsSignup = () => {
         clearErrors();
 
         if (isSignup && isResend) {
             setIsSignup(false);
-            setIsResend({...isResend, val: false})
+            setIsResend({ ...isResend, val: false })
         } else {
             setIsSignup(toggleBoolean)
         }
@@ -49,7 +50,7 @@ export function LoginPage() {
     const NonAuthErrorAlert = useErrorAlert({
         error: error.other,
         clearError: () => {
-            setError((prevError) => ({...prevError, other: null}));
+            setError((prevError) => ({ ...prevError, other: null }));
         },
         severity: "error"
     });
@@ -65,19 +66,19 @@ export function LoginPage() {
     const [showPassword, setShowPassword] = React.useState(false);
     const toggleShowPassword = () => setShowPassword(toggleBoolean);
 
-    const onFormSubmit = async ({email, password}) => {
+    const onFormSubmit = async ({ email, password }) => {
         clearErrors()
         try {
             if (isSignup) {
                 if (isResend.val) {
                     if (isResend.type === 'email') {
-                        await resendConfirmationEmail({email})
+                        await resendConfirmationEmail({ email })
                     } else {
-                        await app.emailPasswordAuth.sendResetPasswordEmail({email});
+                        await app.emailPasswordAuth.sendResetPasswordEmail({ email });
                         setSuccess("An email was sent to your inbox to reset your password.")
                     }
                 } else {
-                    await app.emailPasswordAuth.registerUser({email, password});
+                    await app.emailPasswordAuth.registerUser({ email, password });
                     setSuccess("A confirmation email was sent to your inbox.")
                 }
 
@@ -91,90 +92,110 @@ export function LoginPage() {
         }
     };
 
-    const resendConfirmationEmail = async ({email}) => {
+    const resendConfirmationEmail = async ({ email }) => {
         try {
             if (isSignup && isResend.type === 'email' && isResend.val) {
-                await app.emailPasswordAuth.resendConfirmationEmail({email})
+                await app.emailPasswordAuth.resendConfirmationEmail({ email })
                 setSuccess("Confirmation email resent, check your inbox.")
             }
         } catch (err) {
             handleAuthenticationError(err, setError)
         }
     }
-
     return (
-        <Container maxWidth="sm" className="main-container" style={{display: "flex", justifyContent: "center", alignItems: "center", height: "calc(100vh - 64px)"}}>
-            <Card className="auth-card" variant="outlined">
+        <div className="login-container" >
+            <div className="auth-card" variant="outlined">
                 <form
                     ref={formRef}
                     className="auth-form"
                     onSubmit={(e) => {
                         e.preventDefault();
                         const formData = new FormData(e.target);
-                        const {email, password} = Object.fromEntries(formData.entries());
-                        onFormSubmit({email, password});
+                        const { email, password } = Object.fromEntries(formData.entries());
+                        onFormSubmit({ email, password });
                     }}
                 >
-                    <Typography component="h2" variant="h4">
-                        Don't miss your next bite.
-                    </Typography>
-                    <Typography variant="subtitle1" gutterBottom>
+                    <Typography color={"#3a3a3a"} fontWeight={600} sx={{ fontSize: 'max(4vw,32px)', lineHeight: 'max(4vw, 32px)' }} >
+                        Don't miss <br /> your next bite.</Typography>
+                    <Typography color={"#3a3a3a"} sx={{ fontSize: 'max(1vw, 18px)' }} fontWeight={500} gutterBottom>
                         {isSignup
-                            ? isResend.val ? ("Enter your email to " + (isResend.type==="email" ? "resend your email confirmation." : "reset your password."))  : "Enter your email and a password to create a new account."
-                            : "Enter your email and a password to log in with an existing account."}
+                            ? isResend.val ? ("Enter your email to " + (isResend.type === "email" ? "resend your email confirmation." : "reset your password.")) : "To create a new account, please provide an email and password."
+                            : "Enter your email and password to login with an existing account."}
                     </Typography>
-                    <NonAuthErrorAlert/>
-                    <NonAuthSuccessAlert/>
+                    <NonAuthErrorAlert />
+                    <NonAuthSuccessAlert />
                     <TextField
                         id="input-email"
                         name="email"
                         placeholder="Email"
-                        variant="outlined"
+                        variant="standard"
                         error={Boolean(error.email)}
                         helperText={error.email ?? ""}
+                        inputProps={{ color: '#3a3a3a' }}
+                        sx={{
+                            input: { color: '#3a3a3a', fontWeight: 600, fontSize: '20px' }, '& .MuiInput-underline:before': { borderBottomColor: 'grey' },
+                            '& .MuiInput-underline:after': { borderBottomColor: '#3a3a3a' },
+                            '&& .MuiInput-underline:hover::after': { borderBottomColor: '#3a3a3a' },
+                            '&& .MuiInput-underline:hover::before': { borderBottomColor: '#3a3a3a' },
+
+
+                        }}
                     />
                     {isResend.val ? null :
                         <TextField
-                        id="input-password"
-                        data-testid="input-password"
-                        type={showPassword ? "text" : "password"}
-                        name="password"
-                        placeholder="Password"
-                        variant="outlined"
-                        error={Boolean(error.password)}
-                        helperText={error.password ?? ""}
-                        InputProps={{
-                            endAdornment: (
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={toggleShowPassword}
-                                        onMouseDown={(e) => {
-                                            e.preventDefault();
-                                        }}
-                                        size="large"
-                                    >
-                                        {showPassword ? <Visibility/> : <VisibilityOff/>}
-                                    </IconButton>
-                                </InputAdornment>
-                            ),
-                        }}
-                    />}
+                            id="input-password"
+                            data-testid="input-password"
+                            type={showPassword ? "text" : "password"}
+                            name="password"
+                            placeholder="Password"
+                            variant="standard"
+                            error={Boolean(error.password)}
+                            helperText={error.password ?? ""}
+                            sx={{
+                                input: { color: '#3a3a3a', fontWeight: 600, fontSize: '20px' }, '& .MuiInput-underline:before': { borderBottomColor: 'grey' },
+                                '& .MuiInput-underline:after': { borderBottomColor: '#3a3a3a' },
+                                '&& .MuiInput-underline:hover::after': { borderBottomColor: '#3a3a3a' },
+                                '&& .MuiInput-underline:hover::before': { borderBottomColor: '#3a3a3a' },
 
-                    <Button
-                        id="submit-button"
-                        data-testid="submit-button"
-                        type="submit"
-                        variant="contained"
-                        color="primary"
-                    >
-                        {isSignup ? isResend.val ? "Send" : "Create Account" : "Log In"}
-                    </Button>
+                                '& .MuiFormLabel-root': { color: '#3a3a3a' }
+
+                            }}
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label="toggle password visibility"
+                                            onClick={toggleShowPassword}
+                                            onMouseDown={(e) => {
+                                                e.preventDefault();
+                                            }}
+                                            size="large"
+                                        >
+                                            {showPassword ? <Visibility /> : <VisibilityOff />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />}
+
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                        <Button
+                            id="submit-button"
+                            data-testid="submit-button"
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                            sx={{ marginBottom: 3, borderRadius: 10, fontWeight: 600, width: 300 }}
+                        >
+                            {isSignup ? isResend.val ? "Send" : "Create New Account" : "Login"}
+                        </Button>
+                    </div>
                     <button
                         id="toggle-auth-type-button"
                         type="button"
                         className="link-button"
-                        onClick={() => {toggleIsSignup(); }}
+                        onClick={() => { toggleIsSignup(); }}
+                        style={{ color: '#3a3a3a' }}
                     >
                         {isSignup
                             ? "Already have an account? Log In"
@@ -182,36 +203,40 @@ export function LoginPage() {
                     </button>
 
                     {isSignup
-                        ? isResend.val ? null : <div style={{display: 'flex', flexDirection:'column'}}>
+                        ? isResend.val ? null : <div style={{ display: 'flex', flexDirection: 'column' }}>
                             <button id="toggle-auth-type-button"
-                                    type="button"
-                                    className="link-button"
-                                    style={{marginBottom: '10px'}}
-                                    onClick={(e) => {
-                                        // e.preventDefault();
-                                        // const formData = new FormData(formRef.current);
-                                        // const {email, password} = Object.fromEntries(formData.entries());
-                                        // resendConfirmationEmail({email});
-                                        setIsResend({val: true, type: 'email'})
-                                    }}>Resend confirmation email
+                                type="button"
+                                className="link-button"
+                                style={{ marginBottom: '10px', color: '#3a3a3a' }}
+                                onClick={(e) => {
+                                    // e.preventDefault();
+                                    // const formData = new FormData(formRef.current);
+                                    // const {email, password} = Object.fromEntries(formData.entries());
+                                    // resendConfirmationEmail({email});
+                                    setIsResend({ val: true, type: 'email' })
+                                }}>Resend confirmation email
                             </button>
                             <button id="toggle-auth-type-button"
-                                    type="button"
-                                    className="link-button"
-                                    onClick={(e) => {
-                                        // e.preventDefault();
-                                        // const formData = new FormData(formRef.current);
-                                        // const {email, password} = Object.fromEntries(formData.entries());
-                                        //resendConfirmationEmail({email});
-                                        setIsResend({val: true, type: 'password'})
-                                    }}>Forgot password?
+                                type="button"
+                                className="link-button"
+                                style={{ color: '#3a3a3a' }}
+                                onClick={(e) => {
+                                    // e.preventDefault();
+                                    // const formData = new FormData(formRef.current);
+                                    // const {email, password} = Object.fromEntries(formData.entries());
+                                    //resendConfirmationEmail({email});
+                                    setIsResend({ val: true, type: 'password' })
+                                }}>Forgot password?
                             </button>
                         </div>
                         : null}
                 </form>
-            </Card>
+            </div>
+            <div className="campus-img">
+
+            </div>
             {/*<MoreInfoDocsLink />*/}
-        </Container>
+        </div >
     );
 }
 
@@ -227,7 +252,7 @@ function handleAuthenticationError(err, setError) {
         console.error(err);
     };
     if (err instanceof Realm.MongoDBRealmError) {
-        const {error, statusCode} = err;
+        const { error, statusCode } = err;
         const errorType = error || statusCode;
         switch (errorType) {
             case "already confirmed":

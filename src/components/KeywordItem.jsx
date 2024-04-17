@@ -5,9 +5,9 @@ import {
 
 
 export function KeywordItem({ keyword, keywordActions }) {
-  return (
-      <Chip style={{margin: 5}} label={keyword.summary} onDelete={() => {
-          keywordActions.deleteKeyword(keyword);
-      }} />
-  );
+    return (
+        <Chip style={{ margin: 5, padding: 10 }} label={keyword.summary} onDelete={() => {
+            keywordActions.deleteKeyword(keyword);
+        }} />
+    );
 }

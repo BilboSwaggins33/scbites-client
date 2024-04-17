@@ -15,7 +15,7 @@ const themeConfig = {
     fontFamily: [
       'Source Sans Pro',
     ]
-  }
+  },
 }
 
 const theme = createTheme(themeConfig);
