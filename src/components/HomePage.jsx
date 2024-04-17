@@ -24,7 +24,7 @@ export function HomePage() {
                     <LinearProgress />
                 ) : null
             ) : (
-                <div className="main" style={{ height: '100%' }}>
+                <div className="main" style={{ height: '100%', background: 'white'}}>
                     <div className="sub-container">
 
                         <div className="keyword-items-container">
