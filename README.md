@@ -69,7 +69,7 @@
 SCBites is a notification app for a better USC dining experience. Users can select specific menu items, keywords, 
 and tags relevant to their dietary preferences or interests. If you're craving a particular dish, 
 scbites keeps you informed with email notifications.
-This repository serves as the client code for the website, https://sbites.rocks. 
+This repository serves as the client code for the website, https://scbites.rocks. 
 It contains code for creating/deleting Realm users, authenticating them, and updating/listening to state changes. 
 Visit the scbite server repo to learn more: https://github.com/BilboSwaggins33/scbites-client
 
