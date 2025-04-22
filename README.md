@@ -219,7 +219,7 @@ Project Link: [https://github.com/BilboSwaggins33/scbites-client](https://github
 [license-url]: https://github.com/BilboSwaggins33/scbites-client/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/aaron-zhang-2454401b6
-[SCBites Screen Shot]: https://scbites.rocks
+[SCBites Screen Shot]: https://scbites.tech
 [product-screenshot]: ./public/images/village_dining.jpg
 
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
